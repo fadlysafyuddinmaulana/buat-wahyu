@@ -1,0 +1,74 @@
+import 'package:flutter/material.dart';
+import 'mahasiswa_list.dart'; // Impor kelas MahasiswaList
+import 'mahasiswa.dart'; // Impor kelas Mahasiswa
+
+class AngkatanList extends StatelessWidget {
+  final List<String> angkatan = [
+    'Angkatan 2019',
+    'Angkatan 2020',
+    'Angkatan 2021'
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Daftar Angkatan'),
+      ),
+      body: ListView.builder(
+        itemCount: angkatan.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            padding: EdgeInsets.symmetric(vertical: 8.0),
+            color: Colors.blue, // Warna latar belakang
+            child: ListTile(
+              title: Text(
+                angkatan[index],
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MahasiswaList(
+                      angkatan: angkatan[index],
+                      dataMahasiswa: getDataMahasiswa(angkatan[index]),
+                    ),
+                  ),
+                );
+              },
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  List<Mahasiswa> getDataMahasiswa(String angkatan) {
+    // Fungsi ini mengembalikan data mahasiswa sesuai dengan angkatan yang dipilih
+    // Anda bisa mengatur data sesuai dengan kebutuhan aplikasi
+    if (angkatan == 'Angkatan 2019') {
+      return [
+        Mahasiswa(nama: 'Wawan', nomorInduk: '2019001'),
+        Mahasiswa(nama: 'Heru', nomorInduk: '2019002'),
+        Mahasiswa(nama: 'Budi', nomorInduk: '2019003'),
+      ];
+    } else if (angkatan == 'Angkatan 2020') {
+      return [
+        Mahasiswa(nama: 'Rudi', nomorInduk: '2020001'),
+        Mahasiswa(nama: 'Tono', nomorInduk: '2020002'),
+        Mahasiswa(nama: 'Susi', nomorInduk: '2020003'),
+      ];
+    } else if (angkatan == 'Angkatan 2021') {
+      return [
+        Mahasiswa(nama: 'Joko', nomorInduk: '2021001'),
+        Mahasiswa(nama: 'Andi', nomorInduk: '2021002'),
+        Mahasiswa(nama: 'Ani', nomorInduk: '2021003'),
+      ];
+    } else {
+      return [];
+    }
+  }
+}
